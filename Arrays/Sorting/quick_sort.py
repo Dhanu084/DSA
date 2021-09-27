@@ -4,22 +4,17 @@
 def partition(arr, low, high):
     pivot_index = low
 
-    for i in range(low, high):
-        if arr[pivot_index] >= arr[i]:
-            pivot_index += 1
+    while low<high:
+        while low<len(arr) and arr[low]<=arr[pivot_index]:
+            low+=1
+        
+        while arr[high]>arr[pivot_index]:
+            high-=1
 
-    arr[low], arr[pivot_index] = arr[pivot_index], arr[low]
-
-    while low < pivot_index:
-        if arr[low] <= arr[pivot_index]:
-            low += 1
-        elif arr[high] > arr[pivot_index]:
-            high -= 1
-        else:
-            arr[low], arr[high] = arr[high], arr[low]
-            low += 1
-            high -= 1
-    return pivot_index
+        if low<high:
+            arr[low],arr[high] = arr[high],arr[low]
+    arr[high],arr[pivot_index] = arr[pivot_index],arr[high]
+    return high
 
 
 def quick_sort(arr, low, high):
